@@ -1,0 +1,22 @@
+CC = g++ 
+INC_DIR = .
+CFLAGS = -Wall -g -I$(INC_DIR)
+
+TARGET = mergeheader
+
+SOURCE = $(wildcard *.cpp) 
+OBJS = $(patsubst %.cpp, %.o, $(SOURCE))  
+DEPS = $(wildcard *.h)
+
+all : $(TARGET)
+
+# $@ - target, $^ - all depending file, $< - first depending file
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# build all cpp to obj
+%.o: %.cpp
+	$(CC) $(CFLAGS) -o $@ $< 
+
+clean:
+	rm -f *.o
