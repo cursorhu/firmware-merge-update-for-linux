@@ -94,7 +94,8 @@ int FwMerge::ReadConfigFile(std::string &file)
         if(ret != INI_SUCCESS) continue;
 
         //make a copy of ParamFormat and push_back vector.
-        m_vecParam.push_back(param);
+        if((param.m_offset == parameter_table[i].offset) && (param.m_length == parameter_table[i].length))
+            m_vecParam.push_back(param);
     }
 
     return SUCCESS;
